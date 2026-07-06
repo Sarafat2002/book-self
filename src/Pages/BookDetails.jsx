@@ -9,8 +9,8 @@ const BookDetails = () => {
   const books = useLoaderData();
   const expactedBook = books.find((book) => book.bookId === Number(bookId));
 
-  const {bookHandler,bookStore} = useContext(BookContext);
-  console.log(bookHandler,bookStore);
+  const {bookHandler,bookStore,wishlistStore,wishListHandler} = useContext(BookContext);
+  console.log(bookHandler,bookStore,wishlistStore,wishListHandler);
 
   return (
     <div className='w-9/12 mx-auto my-10 rounded-lg'>
@@ -44,7 +44,7 @@ const BookDetails = () => {
 
           <div className='flex gap-5'>
             <button onClick={() => bookHandler(expactedBook)} className='border border-gray-300 px-4 py-2 rounded-md cursor-pointer'>Read</button>
-            <button className='bg-cyan-600 px-4 py-2 text-white rounded-md cursor-pointer'>Wishlist</button>
+            <button onClick={()=>wishListHandler(expactedBook)} className='bg-cyan-600 px-4 py-2 text-white rounded-md cursor-pointer'>Wishlist</button>
           </div>
 
         </div>

@@ -8,6 +8,7 @@ const BookProvider = ({ children }) => {
 
 
   const [bookStore, setBookStore] = useState([]);
+  const [wishlistStore,setWishlistStore] = useState([]);
 
 
   const bookHandler = (currentBook) => {
@@ -22,12 +23,33 @@ const BookProvider = ({ children }) => {
     }
 
   }
+  const wishListHandler = (currentBook) => {
+
+    const isWishStore = wishlistStore.find((items)=>items.bookId===currentBook.bookId);
+
+    if(isWishStore){
+      toast.error("this book is already readlist");
+      return;
+    }
+
+    const newWishStore = wishlistStore.find((items) => items.bookId === currentBook.bookId);
+    console.log(currentBook);
+    if (newWishStore) {
+      toast.error("the book is already wishlist");
+    } else {
+      setWishlistStore([...wishlistStore, currentBook]);
+      toast.success(`${currentBook.bookName}`);
+    }
+
+  }
 
 
   const data = {
     bookStore,
     setBookStore,
     bookHandler,
+    wishlistStore,
+    wishListHandler
   };
 
 

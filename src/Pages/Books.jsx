@@ -4,8 +4,8 @@ import { BookContext } from '../ContextApi/BookProvider'
 
 const Books = () => {
 
-  const check = useContext(BookContext);
-  console.log(check)
+  const {bookStore,wishlistStore} = useContext(BookContext);
+  console.log(bookStore,wishlistStore);
 
   return (
     <div>
