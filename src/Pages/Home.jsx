@@ -4,10 +4,11 @@ import BookCard from '../Components/BookCard'
 import Books from './Books'
 
 const Home = () => {
+
   return (
     <>
-    <Hero/>
-    <BookCard/>
+      <Hero />
+      <BookCard />
     </>
   )
 }
