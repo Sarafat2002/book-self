@@ -10,7 +10,7 @@ const BookDetails = () => {
   const expactedBook = books.find((book) => book.bookId === Number(bookId));
 
   const {bookHandler,bookStore,wishlistStore,wishListHandler} = useContext(BookContext);
-  console.log(bookHandler,bookStore,wishlistStore,wishListHandler);
+
 
   return (
     <div className='w-9/12 mx-auto my-10 rounded-lg'>

@@ -13,10 +13,19 @@ const BookProvider = ({ children }) => {
 
   const bookHandler = (currentBook) => {
 
+    
+    const isStore = wishlistStore.find((items) => items.bookId === currentBook.bookId)
+ 
+    if (isStore) {
+      toast.error("the book is already wishlist ");
+      return
+    }
+
     const newStore = bookStore.find((items) => items.bookId === currentBook.bookId)
-    console.log(currentBook)
+ 
     if (newStore) {
-      toast.error("the book is already read ")
+      toast.error("the book is already read ");
+      return
     } else {
       setBookStore([...bookStore, currentBook]);
       toast.success(`${currentBook.bookName}`);
@@ -25,7 +34,7 @@ const BookProvider = ({ children }) => {
   }
   const wishListHandler = (currentBook) => {
 
-    const isWishStore = wishlistStore.find((items)=>items.bookId===currentBook.bookId);
+    const isWishStore = bookStore.find((items)=>items.bookId===currentBook.bookId);
 
     if(isWishStore){
       toast.error("this book is already readlist");
@@ -33,7 +42,7 @@ const BookProvider = ({ children }) => {
     }
 
     const newWishStore = wishlistStore.find((items) => items.bookId === currentBook.bookId);
-    console.log(currentBook);
+
     if (newWishStore) {
       toast.error("the book is already wishlist");
     } else {

@@ -13,7 +13,7 @@ const ListedBooks = () => {
             {
                 bookStore?.map((book) => {
                     return (
-                        <div key={book.id} className='flex gap-10 space-y-6  '>
+                        <div key={book.bookId} className='flex gap-10 space-y-6  '>
                             <div className='bg-mauve-300 p-6 flex justify-center items-center rounded-lg w-80'>
                                 <img src={book.image} className='h-50' alt="" />
                             </div>
@@ -23,6 +23,7 @@ const ListedBooks = () => {
                                     <h4 className='font-medium text-lg pt-2' > By : {book.author}</h4>
                                 </div>
                                 <div className='flex gap-3 pt-2'>
+                                    <h3 className='font-medium'>Tags : </h3>
                                     {
                                         book.tags.map((item, ind) => {
                                             return (
@@ -30,6 +31,7 @@ const ListedBooks = () => {
                                             )
                                         })
                                     }
+                                    <p className='flex items-center gap-1'> <IoLocationOutline/> Year of Publishing : {book.yearOfPublishing}</p>
                                 </div>
                                 <div className='flex gap-3 pt-2'>
                                     <p className='flex gap-2 items-center'> <FaUserFriends /> By : {book.publisher}</p>
