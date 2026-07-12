@@ -1,17 +1,32 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { BookContext } from '../ContextApi/BookProvider'
 import { IoDocumentTextOutline, IoLocationOutline } from 'react-icons/io5';
 import { FaUserFriends } from 'react-icons/fa';
 
-const ListedBooks = () => {
+const ListedBooks = ({ short }) => {
 
-    const { bookStore, wishlistStore } = useContext(BookContext);
-    console.log(bookStore, wishlistStore);
+    const { bookStore } = useContext(BookContext);
+    const [filterReadlist, setFilterReadlist] = useState(bookStore);
+
+    useEffect(() => {
+        if (short === 'pages') {
+            const shortedData = [...filterReadlist].sort((a, b) => a.totalPages - b.totalPages);
+            setFilterReadlist(shortedData);
+            console.log(shortedData);
+        } else if (short === 'rating') {
+            const shortedData = [...filterReadlist].sort((a, b) => a.rating - b.rating);
+            setFilterReadlist(shortedData);
+            console.log(shortedData);
+        }
+    }, [short]);
+
+
+
 
     return (
         <div className='border border-gray-200 p-9'>
             {
-                bookStore?.map((book) => {
+                filterReadlist?.map((book) => {
                     return (
                         <div key={book.bookId} className='flex gap-10 space-y-6  '>
                             <div className='bg-mauve-300 p-6 flex justify-center items-center rounded-lg w-80'>
@@ -31,7 +46,7 @@ const ListedBooks = () => {
                                             )
                                         })
                                     }
-                                    <p className='flex items-center gap-1'> <IoLocationOutline/> Year of Publishing : {book.yearOfPublishing}</p>
+                                    <p className='flex items-center gap-1'> <IoLocationOutline /> Year of Publishing : {book.yearOfPublishing}</p>
                                 </div>
                                 <div className='flex gap-3 pt-2'>
                                     <p className='flex gap-2 items-center'> <FaUserFriends /> By : {book.publisher}</p>

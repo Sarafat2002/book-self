@@ -5,8 +5,8 @@ import { FaUserFriends } from 'react-icons/fa';
 
 const WishList= () => {
 
-    const { bookStore, wishlistStore } = useContext(BookContext);
-    console.log(bookStore, wishlistStore);
+    const {wishlistStore } = useContext(BookContext);
+
 
     return (
         <div className='border border-gray-200 p-9'>
