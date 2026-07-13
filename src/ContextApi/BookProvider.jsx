@@ -1,42 +1,44 @@
 import React, { Children, createContext } from 'react'
 import { useContext, useState } from 'react'
 import { toast } from 'react-toastify';
+import { getAllReadlistDb, addLocalReadlist, addLocalWishlist, getWishlistDb } from '../LocalDb/LocalStore.js'
 
 export const BookContext = createContext();
 
 const BookProvider = ({ children }) => {
 
 
-  const [bookStore, setBookStore] = useState([]);
-  const [wishlistStore,setWishlistStore] = useState([]);
+  const [bookStore, setBookStore] = useState(() => getAllReadlistDb());
+  const [wishlistStore, setWishlistStore] = useState(() => getWishlistDb());
 
 
   const bookHandler = (currentBook) => {
 
-    
+
     const isStore = wishlistStore.find((items) => items.bookId === currentBook.bookId)
- 
+
     if (isStore) {
       toast.error("the book is already wishlist ");
       return
     }
 
     const newStore = bookStore.find((items) => items.bookId === currentBook.bookId)
- 
+
     if (newStore) {
       toast.error("the book is already read ");
       return
     } else {
-      setBookStore([...bookStore, currentBook]);
+      addLocalReadlist(currentBook);
+      setBookStore(getAllReadlistDb());
       toast.success(`${currentBook.bookName}`);
     }
 
   }
   const wishListHandler = (currentBook) => {
 
-    const isWishStore = bookStore.find((items)=>items.bookId===currentBook.bookId);
+    const isWishStore = bookStore.find((items) => items.bookId === currentBook.bookId);
 
-    if(isWishStore){
+    if (isWishStore) {
       toast.error("this book is already readlist");
       return;
     }
@@ -46,7 +48,8 @@ const BookProvider = ({ children }) => {
     if (newWishStore) {
       toast.error("the book is already wishlist");
     } else {
-      setWishlistStore([...wishlistStore, currentBook]);
+      addLocalWishlist(currentBook);
+      setWishlistStore(getWishlistDb());
       toast.success(`${currentBook.bookName}`);
     }
 

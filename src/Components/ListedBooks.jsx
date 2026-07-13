@@ -12,11 +12,11 @@ const ListedBooks = ({ short }) => {
         if (short === 'pages') {
             const shortedData = [...filterReadlist].sort((a, b) => a.totalPages - b.totalPages);
             setFilterReadlist(shortedData);
-            console.log(shortedData);
+
         } else if (short === 'rating') {
             const shortedData = [...filterReadlist].sort((a, b) => a.rating - b.rating);
             setFilterReadlist(shortedData);
-            console.log(shortedData);
+
         }
     }, [short]);
 

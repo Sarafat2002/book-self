@@ -13,7 +13,6 @@ const Books = () => {
   const { bookStore, wishlistStore } = useContext(BookContext);
   const [open, setOpen] = useState(false);
   const [short,setShort] = useState("");
-  console.log(short);
 
 
   return (

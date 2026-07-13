@@ -1,17 +1,29 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { BookContext } from '../ContextApi/BookProvider'
 import { IoDocumentTextOutline, IoLocationOutline } from 'react-icons/io5';
 import { FaUserFriends } from 'react-icons/fa';
 
-const WishList= () => {
+const WishList = ({short}) => {
 
-    const {wishlistStore } = useContext(BookContext);
+    const { wishlistStore } = useContext(BookContext);
+    const [filterWishlist, setFilterWishlist] = useState(wishlistStore);
 
+    useEffect(() => {
+        if (short === 'pages') {
+            const shortedData = [...filterWishlist].sort((a, b) => a.totalPages - b.totalPages);
+            setFilterWishlist(shortedData);
+
+        } else if (short === 'rating') {
+            const shortedData = [...filterWishlist].sort((a, b) => a.rating - b.rating);
+           setFilterWishlist(shortedData);
+
+        }
+    }, [short]);
 
     return (
         <div className='border border-gray-200 p-9'>
             {
-                wishlistStore?.map((book) => {
+                filterWishlist?.map((book) => {
                     return (
                         <div key={book.bookId} className='flex gap-10 space-y-6  '>
                             <div className='bg-mauve-300 p-6 flex justify-center items-center rounded-lg w-80'>
@@ -31,7 +43,7 @@ const WishList= () => {
                                             )
                                         })
                                     }
-                                    <p className='flex items-center gap-1'> <IoLocationOutline/> Year of Publishing : {book.yearOfPublishing}</p>
+                                    <p className='flex items-center gap-1'> <IoLocationOutline /> Year of Publishing : {book.yearOfPublishing}</p>
                                 </div>
                                 <div className='flex gap-3 pt-2'>
                                     <p className='flex gap-2 items-center'> <FaUserFriends /> By : {book.publisher}</p>

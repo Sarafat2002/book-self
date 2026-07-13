@@ -10,12 +10,22 @@ const Navbar = () => {
   <ul className="flex gap-10 justify-center items-center">
     <li> <NavLink className={({isActive})=>{
       return(
-        isActive? 'px-6 py-2 rounded-sm border border-green-600'
+        isActive? 'px-6 py-2 rounded-sm border border-green-400 text-green-800'
                : 'border-none'
       )
     }} to="/">Home</NavLink></li>
-    <li><NavLink to="/books">Listed Books</NavLink></li>
-    <li><NavLink to="/readonly">Pages to Read</NavLink></li>
+    <li><NavLink className={({isActive})=>{
+     return(
+      isActive?' px-6 py-2 rounded-sm border border-green-400 text-green-800'
+      :'border-none'
+     );
+    }} to="/books">Listed Books</NavLink></li>
+    <li><NavLink className={({isActive})=>{
+           return(
+        isActive?'px-6 py-2 border border-green-400 text-green-800'
+        :'border-none'
+           );
+    }} to="/readonly">Pages to Read</NavLink></li>
   </ul>
 
   <div className="flex gap-3">
