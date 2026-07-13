@@ -29,7 +29,7 @@ const router = createBrowserRouter ([
         path: "/bookDetails/:bookId",
         Component: BookDetails ,
         loader: async () => {
-          const res = await fetch("/data/booksData.json")
+          const res = await fetch("/booksData.json")
           return res.json()
         }
       }

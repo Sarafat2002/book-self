@@ -8,7 +8,7 @@ const BookCard = () => {
     const [bookData, setBookData] = useState([]);
 
     useEffect(() => {
-        fetch("/data/booksData.json")
+        fetch("/booksData.json")
             .then(res => res.json())
             .then(data => setBookData(data))
     }, [])

@@ -8,7 +8,7 @@ const Readonly = () => {
 
 
   useEffect(() => {
-    fetch("/data/booksData.json")
+    fetch("/booksData.json")
       .then(res => res.json())
       .then(data => setChartData(data))
   }, []);
